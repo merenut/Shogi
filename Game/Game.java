@@ -3,10 +3,9 @@ package Game;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import GameUI.GameGUI;
-
 public class Game implements Serializable {
 	private ArrayList<Piece> pieces; 
+	private ArrayList<Piece> captured;
 	private Board board; 
 	private String playerOne; 
 	private String playerTwo; 
@@ -25,6 +24,7 @@ public class Game implements Serializable {
 		// TODO Auto-generated constructor stub
 		try {
 			this.board = new Board();
+			captured = new ArrayList<Piece>();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,5 +118,13 @@ public class Game implements Serializable {
 	}
 	public String getErrorMessage() {
 		return errorMessage;
+	}
+	public void addCapturedPiece(Piece p)
+	{
+		captured.add(p);
+	}
+	public ArrayList<Piece> getCaptured()
+	{
+		return captured;
 	}
 }

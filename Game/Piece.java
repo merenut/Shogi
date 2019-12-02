@@ -20,6 +20,7 @@ public class Piece implements Serializable{
 		this.promotable = promotable;
 		this.isKing = isKing;
 		this.moveset = moveset;
+		this.promotedMoveset = promotedMoveset;
 		this.owner = owner; 
 		
 		//need to make sure that the direction is okay
@@ -35,6 +36,7 @@ public class Piece implements Serializable{
 
 	public void promote() {
 		if (this.promotable && !this.isPromoted) {
+			System.out.println("Promoting piece");
 			this.isPromoted = true;
 		}
 

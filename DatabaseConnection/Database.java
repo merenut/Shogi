@@ -50,6 +50,7 @@ public class Database {
 	public boolean verifyUserExistsForCreateUser(User user) {
 		String query = String.format("select * from USER where username='%s'", 
 									 user.getUsername()); 
+		
 		if (this.query(query).size() == 0) {
 			this.saveAccount(user);
 			return true; 
@@ -65,6 +66,7 @@ public class Database {
 				user.getUsername(), 
 				this.key,
 				user.getPassword()); 
+		
 		if (this.query(query).size() != 0) {
 			return true; 
 		}

@@ -236,15 +236,19 @@ public class GameServer extends AbstractServer {
 			
 			
 			boolean acceptable; 
-			if (defactoGame.isMoving()) {
-				acceptable = GameLogic.handleMove(defactoGame); 
+			boolean win;
+			if (defactoGame.isMoving() && !defactoGame.isPromoting()) {
+				acceptable = GameLogic.handleMove(refGame, defactoGame);
 			}
-			else if(defactoGame.isPromoting()) {
-				acceptable = GameLogic.handlePromotion(defactoGame); 
+			else if(defactoGame.isPromoting() && !defactoGame.isMoving()) {
+				acceptable = GameLogic.handlePromotion(refGame, defactoGame);
 			}
 			else {
 				acceptable = true; 
 			}
+			
+			win = GameLogic.winCheck(defactoGame);
+			
 			
 			//find the connection id's (reusing code from earlier when the references were unknown)
 			ConnectionToClient justWentConnection = null; 
@@ -285,7 +289,7 @@ public class GameServer extends AbstractServer {
 					refGame.setYourTurn(true); 
 					justWentConnection.sendToClient(refGame);
 					refGame.setYourTurn(false);
-					justWentConnection.sendToClient(refGame);
+					opponentConnection.sendToClient(refGame);
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
